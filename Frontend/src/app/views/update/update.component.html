@@ -1,0 +1,106 @@
+<form [formGroup]="updateGroup" (ngSubmit)="updateBread()">
+
+    <mat-form-field style="grid-area: type;">
+        <mat-label>Type: </mat-label>
+        <mat-select formControlName="$type">
+            @for (type of types; track type;) {
+            <mat-option value="{{type}}">{{type}}</mat-option>
+            }
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field style="grid-area: grain;">
+        <mat-label>Grain: </mat-label>
+        <mat-select formControlName="grain">
+            @for (grain of grains; track grain;) {
+            <mat-option value="{{grain}}">{{grain}}</mat-option>
+            }
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field style="grid-area: name;">
+        <mat-label>Name: </mat-label>
+        <input matInput formControlName="name" />
+    </mat-form-field>
+
+    <div style="grid-area: fermented;">
+        <mat-radio-group formControlName="fermented">
+            <mat-radio-button [value]="true">Fermented</mat-radio-button>
+            <mat-radio-button [value]="false">Not fermented</mat-radio-button>
+        </mat-radio-group>
+    </div>
+
+    @if (updateGroup.get('$type')?.value === 'LiquidBread') {
+    <mat-form-field style="grid-area: viscosity;">
+        <mat-label>Viscosity: </mat-label>
+        <mat-select formControlName="viscosity">
+            <mat-option value="Low">Low</mat-option>
+            <mat-option value="High">High</mat-option>
+        </mat-select>
+    </mat-form-field>
+    } @else if (updateGroup.get('$type')?.value !== '') {
+    <mat-form-field style="grid-area: texture;">
+        <mat-label>Texture: </mat-label>
+        <input matInput formControlName="texture" />
+    </mat-form-field>
+
+    @if (updateGroup.get('$type')?.value === 'SimpleSandwich' || updateGroup.get('$type')?.value ===
+    'DoubleSandwich' || updateGroup.get('$type')?.value === 'MultiSandwich') {
+    <div style="grid-area: dressed;">
+        <mat-radio-group formControlName="dressed">
+            <mat-radio-button [value]="true">Dressed</mat-radio-button>
+            <mat-radio-button [value]="false">Not dressed</mat-radio-button>
+        </mat-radio-group>
+    </div>
+    }
+
+    @if (updateGroup.get('$type')?.value === 'SimpleSandwich' || updateGroup.get('$type')?.value ===
+    'MultiSandwich') {
+    <div style="grid-area: topping;">
+        <mat-form-field>
+            <mat-label>Toppings: </mat-label>
+            <input matInput [(ngModel)]="topping" [ngModelOptions]="{standalone: true}" />
+        </mat-form-field>
+        <button mat-raised-button type="button" color="primary" (click)="addTopping()">Add</button>
+        <mat-list role="list">
+            @for (topping of updateGroup.value.toppings; track topping;) {
+            <mat-list-item role="listitem">
+                {{topping}}
+                <button mat-icon-button color="accent"
+                    (click)="deleteTopping(topping)"><mat-icon>delete</mat-icon></button>
+            </mat-list-item>
+            }
+        </mat-list>
+    </div>
+    }
+
+    @if (updateGroup.get('$type')?.value === 'DoubleSandwich' || updateGroup.get('$type')?.value === 'MultiSandwich'
+    || updateGroup.get('$type')?.value === 'Boatlike') {
+    <div style="grid-area: filling;">
+        <mat-form-field>
+            <mat-label>Fillings: </mat-label>
+            <input matInput [(ngModel)]="filling" [ngModelOptions]="{standalone: true}" />
+        </mat-form-field>
+        <button mat-raised-button type="button" color="primary" (click)="addFilling()">Add</button>
+        <mat-list role="list">
+            @for (filling of updateGroup.value.fillings; track filling;) {
+            <mat-list-item role="listitem">
+                {{filling}}
+                <button mat-icon-button color="accent"
+                    (click)="deleteFilling(filling)"><mat-icon>delete</mat-icon></button>
+            </mat-list-item>
+            }
+        </mat-list>
+    </div>
+    }
+
+    @if (updateGroup.get('$type')?.value === 'Extruded') {
+    <mat-form-field style="grid-area: shape;">
+        <mat-label>Shape: </mat-label>
+        <input matInput formControlName="shape" />
+    </mat-form-field>
+    }
+    }
+
+    <button mat-raised-button color="primary" type="submit" style="grid-area: button;">Update</button>
+</form>

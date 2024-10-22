@@ -1,0 +1,10 @@
+form {
+    padding: 0.5rem 0;
+    display: grid;
+    grid-template-areas: 
+        "name type grain fermented button"
+        "viscosity shape texture dressed button"
+        "topping topping filling filling button"
+    ;
+    gap: 1rem;
+}

@@ -1,0 +1,8 @@
+@use '@angular/material' as mat;
+
+@mixin app-theme($theme) {
+    .app-wrapper {
+        min-height: 100vh;
+        background-color: mat.get-theme-color($theme, background, background);
+    }
+}

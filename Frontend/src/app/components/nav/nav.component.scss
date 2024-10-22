@@ -1,0 +1,24 @@
+@use '@angular/material' as mat;
+
+@mixin nav-theme($theme) {
+    .nav-wrapper {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        border-bottom: 2px solid mat.get-theme-color($theme, primary, lighter);
+
+        > :first-child {
+            margin: 0 auto 0 0.5rem;
+        }
+
+        > :last-child {
+            margin: 0 1rem 0 auto;
+        }
+    }
+
+    .mat-mdc-menu-item, .mat-mdc-menu-submenu-icon polygon {
+        color: mat.get-theme-color($theme, primary, 300);
+    }
+}

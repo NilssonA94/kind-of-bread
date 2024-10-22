@@ -1,0 +1,30 @@
+<div class="card-wrapper">
+    @for (bread of breads; track bread;) {
+    <mat-card class="size">
+        <mat-card-title>{{bread.name}}</mat-card-title>
+        <mat-card-subtitle>Type: {{splitCapitalizedWords(bread['$type'])}}</mat-card-subtitle>
+        <mat-card-content>
+            @for (key of getKeys(bread); track key;) {
+            @if (isBoolean(bread[key])) {
+            <p>{{capitalizeFirstLetter(key)}}: {{bread[key] ? "Yes" : "No"}}</p>
+            } @else if (isArray(bread[key])) {
+            <mat-list>
+                {{capitalizeFirstLetter(key)}}:
+                @for (addon of bread[key]; track addon;) {
+                <mat-list-item>
+                    <p>{{addon}}</p>
+                </mat-list-item>
+                }
+            </mat-list>
+            } @else if (key !== 'id' && key !== 'name' && key !== '$type') {
+            <p>{{capitalizeFirstLetter(key)}}: {{bread[key]}}</p>
+            }
+            }
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-icon-button color="accent" (click)="editBread(bread)"><mat-icon>edit</mat-icon></button>
+            <button mat-icon-button color="accent" (click)="deleteBread(bread)"><mat-icon>delete</mat-icon></button>
+        </mat-card-actions>
+    </mat-card>
+    }
+</div>

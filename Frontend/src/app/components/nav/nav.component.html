@@ -1,0 +1,22 @@
+<div class="nav-wrapper">
+    <button mat-icon-button color="primary" (click)="changeTheme()"><mat-icon>{{this.theme === 'dark-theme' ? 'brightness_6' : 'brightness_4'}}</mat-icon></button>
+    <button routerLink="/" mat-stroked-button color="primary">Home</button>
+    <button mat-stroked-button color="primary" [matMenuTriggerFor]="getMenu">Get</button>
+    <mat-menu #getMenu="matMenu" class="{{theme}}">
+        <button mat-menu-item (click)="get('All')">All</button>
+        <button mat-menu-item [matMenuTriggerFor]="typeMenu">Types</button>
+    </mat-menu>
+    <mat-menu #typeMenu="matMenu" class="{{theme}}">
+        @for (type of types; track type;) {
+            <button mat-menu-item (click)="get(type)">{{type}}</button>
+        }
+    </mat-menu>
+    <button routerLink="/create" mat-stroked-button color="primary">Create</button>
+    <form (ngSubmit)="search()">
+        <mat-form-field>
+            <mat-label>Search</mat-label>
+            <input matInput type="text" [(ngModel)]="searchValue" name="value">
+            <button matSuffix mat-icon-button color="primary" type="submit"><mat-icon>search</mat-icon></button>
+        </mat-form-field>
+    </form>
+</div>
