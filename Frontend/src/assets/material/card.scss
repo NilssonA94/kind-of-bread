@@ -1,0 +1,8 @@
+@use '@angular/material' as mat;
+
+@mixin card-theme($theme) {
+    mat-card, mat-card-content, mat-card-subtitle, mat-list mat-list-item p {
+        background-color: mat.get-theme-color($theme, primary, darker);
+        color: mat.get-theme-color($theme, accent, default-contrast);
+    }
+}

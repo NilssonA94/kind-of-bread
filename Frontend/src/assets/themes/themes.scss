@@ -1,0 +1,26 @@
+@use '@angular/material' as mat;
+@import '../../app/app.component';
+@import '../../app/components/nav/nav.component';
+@import '../material/card';
+@import '../material/form';
+@import 'dark';
+@import 'light';
+
+@include mat.core();
+
+@mixin dark-theme() {
+    @include mat.all-component-themes($dark-theme);
+    @include mat.core-color($dark-theme);
+    @include app-theme($dark-theme);
+    @include card-theme($dark-theme);
+    @include form-theme($dark-theme);
+    @include nav-theme($dark-theme);
+}
+
+@mixin light-theme() {
+    @include mat.all-component-themes($light-theme);
+    @include app-theme($light-theme);
+    @include card-theme($light-theme);
+    @include form-theme($light-theme);
+    @include nav-theme($light-theme);
+}

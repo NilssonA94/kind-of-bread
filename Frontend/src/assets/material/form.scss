@@ -1,0 +1,11 @@
+@use '@angular/material' as mat;
+
+@mixin form-theme($theme) {
+    .mat-mdc-form-field {
+        margin: 0.5rem 0;
+    }
+
+    .mat-mdc-form-field-subscript-wrapper {
+        height: 0;
+    }
+}
