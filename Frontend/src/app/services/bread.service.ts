@@ -9,7 +9,8 @@ import { Bread } from '../models/types';
 export class BreadService {
   private http = inject(HttpClient);
 
-  private apiUrl = 'http://localhost:5177/Bread';
+  private host = 'localhost:5104';
+  private apiUrl = `http://${this.host}/Bread`;
 
   getAllBread(): Observable<Bread[]> {
     return this.http.get<Bread[]>(`${this.apiUrl}/Get/All`);
