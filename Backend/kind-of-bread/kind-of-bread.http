@@ -1,0 +1,6 @@
+@kind_of_bread_HostAddress = http://localhost:5104
+
+GET {{kind_of_bread_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
